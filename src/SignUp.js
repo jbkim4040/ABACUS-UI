@@ -98,11 +98,17 @@ const SignUp = () => {
     </Form.Item>
   );
 
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
+  const bankNameSelector = (
+    <Form.Item name="bankName" noStyle>
       <Select style={{ width: 70 }}>
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
+        <Option value="KB">국민</Option>
+        <Option value="011">011</Option>
+        <Option value="010">010</Option>
+        <Option value="011">011</Option>
+        <Option value="010">010</Option>
+        <Option value="011">011</Option>
+        <Option value="010">010</Option>
+        <Option value="011">011</Option>
       </Select>
     </Form.Item>
   );
@@ -133,6 +139,7 @@ const SignUp = () => {
       initialValues={{
         residence: ["부서1", "부서1_1", "부서1_1_1"],
         prefix: "010",
+        bankNameSelector: "KB"
       }}
       style={{ maxWidth: 600 }}
       scrollToFirstError
@@ -151,7 +158,27 @@ const SignUp = () => {
           },
         ]}
       >
-        <Input />
+        <Space.Compact block>
+          <Input style={{ width: "70%" }} />
+          <Button style={{ width: "30%" }} >이메일 인증</Button>
+        </Space.Compact>
+      </Form.Item>
+
+      <Form.Item  
+        name="userId"
+        label="아이디"
+        rules={[
+          {
+            required: true,
+            message: "아이디를 입력해주세요!",
+            whitespace: true,
+          },
+        ]}
+      >
+        <Space.Compact block>
+          <Input style={{ width: "70%" }} />
+          <Button style={{ width: "30%" }} >중복확인</Button>
+        </Space.Compact>
       </Form.Item>
 
       <Form.Item
@@ -203,14 +230,17 @@ const SignUp = () => {
         ]}
       >
         <Space.Compact block>
-          <Input style={{ width: "80%" }} />
-          <Select placeholder="직책 선택">
-            <Option value="male">사원</Option>
-            <Option value="female">선임</Option>
-            <Option value="other1">책임</Option>
+          <Input style={{ width: "70%" }} />
+          <Select placeholder="직책 선택" style={{ width: "30%" }}>
+            <Option value="A">사원</Option>
+            <Option value="SA">선임</Option>
+            <Option value="M">책임</Option>
+            <Option value="SM">수석</Option>
+            <Option value="AED">이사</Option>
           </Select>
         </Space.Compact>
       </Form.Item>
+
 
       <Form.Item
         name="phone"
@@ -218,6 +248,14 @@ const SignUp = () => {
         rules={[{ required: true, message: "전화번호룰 입력해주세요!" }]}
       >
         <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+      </Form.Item>
+
+      <Form.Item
+        name="account"
+        label="계좌번호"
+        rules={[{ required: true, message: "계좌번호룰 입력해주세요!" }]}
+      >
+        <Input addonBefore={bankNameSelector} style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item
